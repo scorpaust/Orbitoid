@@ -16,6 +16,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private LayerMask whatIsGround;
 
+    [SerializeField]
+    private BulletController shotToFire;
+
+    [SerializeField]
+    private Transform shotPoint;
+
     private Rigidbody2D rb;
 
     private Animator anim;
@@ -38,6 +44,8 @@ public class PlayerController : MonoBehaviour
         Jump();
 
         Animate();
+
+        Fire();
     }
 
     private void Move()
@@ -75,5 +83,15 @@ public class PlayerController : MonoBehaviour
 
         // Run animation
         anim.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
+	}
+
+    private void Fire()
+	{
+        if (Input.GetButtonDown("Fire1"))
+		{
+            Instantiate(shotToFire, shotPoint.position, shotPoint.rotation).MoveDir = new Vector2(transform.localScale.x, 0f);
+
+            anim.SetTrigger("ShotFired");
+		}
 	}
 }
