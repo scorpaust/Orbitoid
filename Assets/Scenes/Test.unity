@@ -199,6 +199,13 @@ MonoBehaviour:
     m_Bits: 64
   shotToFire: {fileID: 8106012952823624306, guid: 811b80bae4502504f9648cbe271c9802, type: 3}
   shotPoint: {fileID: 1391518272}
+  dashSpeed: 25
+  dashTime: 0.2
+  afterImageFX: {fileID: 4020797564312775675, guid: 5bbd79faf185c9a4e9a55eb8d2ad3fa1, type: 3}
+  afterImafeFXLifetime: 0.5
+  timeBetweenAfterImages: 0.033333335
+  afterImageColor: {r: 0, g: 0.481045, b: 0.49056602, a: 0}
+  waitAfterDashing: 0.25
 --- !u!1 &193399897
 GameObject:
   m_ObjectHideFlags: 0
@@ -2382,8 +2389,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1751784731
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7815371044791450175, guid: 3607ff319a5a56141aa94c66e33ca304, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

@@ -22,15 +22,45 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Transform shotPoint;
 
+    [SerializeField]
+    private float dashSpeed, dashTime;
+
+    [SerializeField]
+    private SpriteRenderer afterImageFX;
+
+    [SerializeField]
+    private float afterImafeFXLifetime;
+
+    [SerializeField]
+    private float timeBetweenAfterImages;
+
+    [SerializeField]
+    private Color afterImageColor;
+
+    [SerializeField]
+    private float waitAfterDashing;
+
+    private SpriteRenderer sr;
+
     private Rigidbody2D rb;
 
     private Animator anim;
 
     private bool isOnGround;
 
+    private bool canDoubleJump;
+
+    private float dashCounter;
+
+    private float afterImageCounter;
+
+    private float dashRechargeCounter;
+
     // Start is called before the first frame update
     void Start()
     {
+        sr = GetComponentInChildren<SpriteRenderer>();
+
         rb = GetComponent<Rigidbody2D>();
 
         anim = GetComponentInChildren<Animator>();
@@ -50,18 +80,47 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
 	{
-        // Sideway movement
-        rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * moveSpeed,rb.velocity.y);
+        if (dashRechargeCounter > 0)
+		{
+            dashRechargeCounter -= Time.deltaTime;
+		} else
+		{
+            if (Input.GetButtonDown("Fire2"))
+            {
+                dashCounter = dashTime;
 
-        // Handle direction change
-        if (rb.velocity.x < 0)
-		{
-            transform.localScale = new Vector3(-1f, 1f, 1f);
-		}
-        else if (rb.velocity.x > 0)
-		{
-            transform.localScale = Vector3.one;
+                ShowAfterImage();
+            }
         }
+
+        if (dashCounter > 0)
+        {
+            dashCounter = dashCounter - Time.deltaTime;
+
+            rb.velocity = new Vector2(dashSpeed * transform.localScale.x, rb.velocity.y);
+
+            afterImageCounter -= Time.deltaTime;
+
+            if (afterImageCounter <= 0)
+                ShowAfterImage();
+
+            dashRechargeCounter = waitAfterDashing;
+        }
+        else
+        {
+            // Sideway movement
+            rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * moveSpeed, rb.velocity.y);
+
+            // Handle direction change
+            if (rb.velocity.x < 0)
+            {
+                transform.localScale = new Vector3(-1f, 1f, 1f);
+            }
+            else if (rb.velocity.x > 0)
+            {
+                transform.localScale = Vector3.one;
+            }
+        }       
 	}
 
     private void Jump()
@@ -70,8 +129,20 @@ public class PlayerController : MonoBehaviour
         isOnGround = Physics2D.OverlapCircle(groundPoint.position, 0.2f, whatIsGround);
 
         // Jump
-        if (Input.GetButtonDown("Jump") && isOnGround)
+        if (Input.GetButtonDown("Jump") && (isOnGround || canDoubleJump))
 		{
+            if (isOnGround)
+			{
+                canDoubleJump = true;
+            }
+            else
+			{
+                canDoubleJump = false;
+
+                anim.SetTrigger("DoubleJump");
+            }
+                
+
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
 		}
 	}
@@ -93,5 +164,20 @@ public class PlayerController : MonoBehaviour
 
             anim.SetTrigger("ShotFired");
 		}
+	}
+
+    public void ShowAfterImage()
+	{
+        SpriteRenderer image = Instantiate(afterImageFX, sr.transform.position, sr.transform.rotation);
+
+        image.sprite = sr.sprite;
+
+        image.transform.localScale = transform.localScale;
+
+        image.color = afterImageFX.color;
+
+        Destroy(image.gameObject, afterImafeFXLifetime);
+
+        afterImageCounter = timeBetweenAfterImages;
 	}
 }
