@@ -40,6 +40,21 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float waitAfterDashing;
 
+    [SerializeField]
+    private GameObject standing, ball;
+
+    [SerializeField]
+    private float waitToBall, ballCounter;
+
+    [SerializeField]
+    private Animator ballAnim;
+
+    [SerializeField]
+    private Transform bombPoint;
+
+    [SerializeField]
+    private GameObject bomb;
+
     private SpriteRenderer sr;
 
     private Rigidbody2D rb;
@@ -73,6 +88,8 @@ public class PlayerController : MonoBehaviour
 
         Jump();
 
+        CheckBallMode();
+
         Animate();
 
         Fire();
@@ -85,7 +102,7 @@ public class PlayerController : MonoBehaviour
             dashRechargeCounter -= Time.deltaTime;
 		} else
 		{
-            if (Input.GetButtonDown("Fire2"))
+            if (Input.GetButtonDown("Fire2") && standing.activeSelf)
             {
                 dashCounter = dashTime;
 
@@ -147,7 +164,7 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-    private void Animate()
+    private void StandingAnimation()
 	{
         // Jump animation
         anim.SetBool("IsOnGround", isOnGround);
@@ -160,11 +177,72 @@ public class PlayerController : MonoBehaviour
 	{
         if (Input.GetButtonDown("Fire1"))
 		{
-            Instantiate(shotToFire, shotPoint.position, shotPoint.rotation).MoveDir = new Vector2(transform.localScale.x, 0f);
+            if (standing.activeSelf)
+			{
+                Instantiate(shotToFire, shotPoint.position, shotPoint.rotation).MoveDir = new Vector2(transform.localScale.x, 0f);
 
-            anim.SetTrigger("ShotFired");
+                anim.SetTrigger("ShotFired");
+            } else if (ball.activeSelf)
+			{
+                Instantiate(bomb, bombPoint.position, bombPoint.rotation);
+			}
+            
 		}
 	}
+
+    private void CheckBallMode()
+	{
+        if (!ball.activeSelf)
+		{
+            if (Input.GetAxisRaw("Vertical") < -.9f)
+			{
+                ballCounter -= Time.deltaTime;
+
+                if (ballCounter <= 0)
+				{
+                    ball.SetActive(true);
+
+                    standing.SetActive(false);
+				}
+			}
+            else
+            {
+                ballCounter = waitToBall;
+            }
+
+        } else
+		{
+            if (Input.GetAxisRaw("Vertical") > 0.9f)
+            {
+                ballCounter -= Time.deltaTime;
+
+                if (ballCounter <= 0)
+                {
+                    ball.SetActive(false);
+
+                    standing.SetActive(true);
+                }
+            }
+            else
+            {
+                ballCounter = waitToBall;
+            }
+        }
+        
+	}
+
+    private void BallAnimation()
+	{
+        ballAnim.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
+	}
+
+    private void Animate()
+	{
+        if (standing.activeSelf)
+            StandingAnimation();
+        else
+            BallAnimation();
+    }
 
     public void ShowAfterImage()
 	{
