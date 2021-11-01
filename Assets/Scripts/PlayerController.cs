@@ -71,6 +71,8 @@ public class PlayerController : MonoBehaviour
 
     private float dashRechargeCounter;
 
+    private PlayerAbilityTracker abilities;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -79,6 +81,8 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         anim = GetComponentInChildren<Animator>();
+
+        abilities = GetComponent<PlayerAbilityTracker>();
     }
 
     // Update is called once per frame
@@ -102,7 +106,7 @@ public class PlayerController : MonoBehaviour
             dashRechargeCounter -= Time.deltaTime;
 		} else
 		{
-            if (Input.GetButtonDown("Fire2") && standing.activeSelf)
+            if (Input.GetButtonDown("Fire2") && standing.activeSelf && abilities.CanDash)
             {
                 dashCounter = dashTime;
 
@@ -146,7 +150,7 @@ public class PlayerController : MonoBehaviour
         isOnGround = Physics2D.OverlapCircle(groundPoint.position, 0.2f, whatIsGround);
 
         // Jump
-        if (Input.GetButtonDown("Jump") && (isOnGround || canDoubleJump))
+        if (Input.GetButtonDown("Jump") && (isOnGround || (canDoubleJump && abilities.CanDoubleJump)))
 		{
             if (isOnGround)
 			{
@@ -182,7 +186,7 @@ public class PlayerController : MonoBehaviour
                 Instantiate(shotToFire, shotPoint.position, shotPoint.rotation).MoveDir = new Vector2(transform.localScale.x, 0f);
 
                 anim.SetTrigger("ShotFired");
-            } else if (ball.activeSelf)
+            } else if (ball.activeSelf && abilities.CanDropBomb)
 			{
                 Instantiate(bomb, bombPoint.position, bombPoint.rotation);
 			}
@@ -194,7 +198,7 @@ public class PlayerController : MonoBehaviour
 	{
         if (!ball.activeSelf)
 		{
-            if (Input.GetAxisRaw("Vertical") < -.9f)
+            if (Input.GetAxisRaw("Vertical") < -.9f && abilities.CanBecomeBall)
 			{
                 ballCounter -= Time.deltaTime;
 

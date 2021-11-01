@@ -12,10 +12,12 @@ public class CameraController : MonoBehaviour
 
     private PlayerController player;
 
+    float speed = 2.5f;
+
     private float halfHeight, halfWidth;
 
-    // Start is called before the first frame update
-    void Start()
+	// Start is called before the first frame update
+	void Start()
     {
         InitializeVariables();
     }
@@ -40,10 +42,10 @@ public class CameraController : MonoBehaviour
     private void FollowPlayer()
 	{
         if (player != null)
-		{
+        {
             transform.position = new Vector3(player.transform.position.x + offsetX, player.transform.position.y, transform.position.z);
-		}
-	}
+        }
+    }
 
     private void ClampCameraPosition()
 	{
