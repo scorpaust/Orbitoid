@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 100100069}
   - component: {fileID: 100100071}
   - component: {fileID: 100100072}
+  - component: {fileID: 100100073}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -228,6 +229,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba0e5fb88e4d3cc48847932b65e4916f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &100100073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100100068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 964602f0fa761da40ab96cace667329d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
 --- !u!4 &110400909 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4323087655832884894, guid: 592dcd3f7d083fd47b771010bba78142, type: 3}
@@ -8282,6 +8296,7 @@ GameObject:
   - component: {fileID: 1700715502}
   - component: {fileID: 1700715504}
   - component: {fileID: 1700715505}
+  - component: {fileID: 1700715506}
   m_Layer: 0
   m_Name: Enemy Walker
   m_TagString: Enemy
@@ -8378,6 +8393,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalHealth: 3
   deathFX: {fileID: 6574870402638935354, guid: 8db3b47f49198d24a8adf92ab62a4d66, type: 3}
+--- !u!114 &1700715506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700715500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11859a639465acf43b5ad86b66927379, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 1
 --- !u!1 &1715310344
 GameObject:
   m_ObjectHideFlags: 0
