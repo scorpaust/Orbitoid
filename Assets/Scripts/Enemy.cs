@@ -6,12 +6,13 @@ public enum EnemyState
 {
     IDLE,
     PATROL,
+    CHASE,
     DEAD
 }
 
 public enum EnemyType
 {
-    PATROLLER,
+    WALKER,
     FLYER,
     BOSS
 }
@@ -22,7 +23,7 @@ public class Enemy : MonoBehaviour
     private Transform[] patrolPoints;
 
     [SerializeField]
-    private float moveSpeed, waitAtPoints;
+    protected float moveSpeed, waitAtPoints;
 
     [SerializeField]
     private float jumpForce;
@@ -37,7 +38,7 @@ public class Enemy : MonoBehaviour
 
     private float waitCounter;
 
-    private Animator anim;
+    protected Animator anim;
 
     private EnemyState state;
 
@@ -50,7 +51,7 @@ public class Enemy : MonoBehaviour
 	}
 
 	// Start is called before the first frame update
-	void Start()
+	protected void Start()
     {
         waitCounter = waitAtPoints;
         state = EnemyState.IDLE;
@@ -63,9 +64,9 @@ public class Enemy : MonoBehaviour
         Patrol();
     }
 
-    private void Patrol()
+    protected virtual void Patrol()
 	{
-        if (type == EnemyType.PATROLLER)
+        if (type == EnemyType.WALKER)
 		{
             if (Mathf.Abs(transform.position.x - patrolPoints[currentPoint].position.x) > 0.2f)
 			{
@@ -117,7 +118,7 @@ public class Enemy : MonoBehaviour
 		}
 	}
 
-    private void NullifyPatrolPointsParent()
+    protected void NullifyPatrolPointsParent()
 	{
         foreach (Transform pPoint in patrolPoints)
 		{
