@@ -88,15 +88,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
+        Move(); // ABSTRACTION
 
-        Jump();
+        Jump(); // ABSTRACTION
 
-        CheckBallMode();
+        CheckBallMode(); // ABSTRACTION
 
-        Animate();
+        Animate(); // ABSTRACTION
 
-        Fire();
+        Fire(); // ABSTRACTION
     }
 
     private void Move()
@@ -116,7 +116,7 @@ public class PlayerController : MonoBehaviour
 
         if (dashCounter > 0)
         {
-            dashCounter = dashCounter - Time.deltaTime;
+            dashCounter -= Time.deltaTime;
 
             rb.velocity = new Vector2(dashSpeed * transform.localScale.x, rb.velocity.y);
 

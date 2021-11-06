@@ -11,18 +11,19 @@ public class EnemyFlyer : Enemy
 
     private Transform player;
 
+    // POLYMORPHISM
     // Start is called before the first frame update
-    new void Start()
+    protected override void Start() 
     {
-        base.Start();
-
         player = PlayerHealthController.instance.transform;
+
+        State = EnemyState.IDLE;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Chase();
+        Chase(); // ABSTRACTION
     }
 
     private void Chase()

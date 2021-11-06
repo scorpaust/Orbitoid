@@ -7,6 +7,12 @@ public class DamagePlayer : MonoBehaviour
     [SerializeField]
     private int damageAmount = 1;
 
+	[SerializeField]
+	private bool destroyOnDamage;
+
+	[SerializeField]
+	private GameObject destroyEffect;
+
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.CompareTag("Player"))
@@ -19,12 +25,19 @@ public class DamagePlayer : MonoBehaviour
 	{
 		if (collision.gameObject.CompareTag("Player"))
 		{
-			DealDamage();
+			DealDamage(); // ABSTRACTION
 		}
 	}
 
 	private void DealDamage()
 	{
 		PlayerHealthController.instance.DamagePlayer(damageAmount);
+
+		if (destroyOnDamage && destroyEffect != null)
+		{
+			Instantiate(destroyEffect, transform.position, transform.rotation);
+
+			Destroy(gameObject);
+		}
 	}
 }

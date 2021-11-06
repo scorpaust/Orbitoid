@@ -16,6 +16,7 @@ public class BulletController : MonoBehaviour
     [SerializeField]
     private int damageAmount = 1;
 
+    // ENCAPSULATION
     public Vector2 MoveDir { get { return moveDir; } set { moveDir = value; } }
 
     private Rigidbody2D rb;

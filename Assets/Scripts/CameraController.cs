@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField]
-    private float offsetX = 3f;
+    private float offsetX = 3f, offsetY = 6f;
 
     [SerializeField]
     private BoxCollider2D boundsBox;
@@ -19,15 +19,15 @@ public class CameraController : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
-        InitializeVariables();
+        InitializeVariables(); // ABSTRACTION
     }
 
     // Update is called once per frame
     void Update()
     {
-        FollowPlayer();
+        FollowPlayer(); // ABSTRACTION
 
-        ClampCameraPosition();
+        ClampCameraPosition(); // ABSTRACTION
     }
 
     private void InitializeVariables()
@@ -43,7 +43,7 @@ public class CameraController : MonoBehaviour
 	{
         if (player != null)
         {
-            transform.position = new Vector3(player.transform.position.x + offsetX, player.transform.position.y, transform.position.z);
+            transform.position = new Vector3(player.transform.position.x + offsetX, player.transform.position.y + offsetY, transform.position.z);
         }
     }
 

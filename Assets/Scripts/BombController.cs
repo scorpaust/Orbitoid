@@ -16,16 +16,10 @@ public class BombController : MonoBehaviour
     [SerializeField]
     private LayerMask whatIsDestructable;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
-        Explode();
+        Explode(); // ABSTRACTION
     }
 
     private void Explode()

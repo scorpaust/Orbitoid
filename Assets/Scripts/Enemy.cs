@@ -42,6 +42,7 @@ public class Enemy : MonoBehaviour
 
     private EnemyState state;
 
+    // ENCAPSULATION
     public EnemyState State { get { return state; } set { state = value; } } 
 
 
@@ -51,7 +52,7 @@ public class Enemy : MonoBehaviour
 	}
 
 	// Start is called before the first frame update
-	protected void Start()
+	protected virtual void Start()
     {
         waitCounter = waitAtPoints;
         state = EnemyState.IDLE;
@@ -61,7 +62,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Patrol();
+        Patrol(); // ABSTRACTION
     }
 
     protected virtual void Patrol()
