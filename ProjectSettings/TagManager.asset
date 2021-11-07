@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Enemy
+  - Door
   layers:
   - Default
   - TransparentFX
@@ -43,14 +44,20 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BG
+    uniqueID: 951485345
+    locked: 0
+  - name: Ground
+    uniqueID: 4172857623
+    locked: 0
   - name: Enemy
     uniqueID: 3081430857
     locked: 0
   - name: Player
     uniqueID: 2543182565
     locked: 0
-  - name: Ground
-    uniqueID: 4172857623
+  - name: Bullet
+    uniqueID: 3308711345
     locked: 0
   - name: Door
     uniqueID: 3138736415

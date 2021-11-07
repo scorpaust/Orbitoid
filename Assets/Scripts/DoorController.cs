@@ -83,14 +83,16 @@ public class DoorController : MonoBehaviour
 
         yield return new WaitForSeconds(1.5f);
 
+        UIController.instance.FadeIn();
+
+        SceneManager.LoadScene(levelToLoad);
+
+        yield return new WaitForEndOfFrame();
+
         RespawnController.instance.SetSpawnPoint(exitPoint.position);
 
         player.CanMove = true;
 
         player.Anim.enabled = true;
-
-        UIController.instance.FadeIn();
-
-        SceneManager.LoadScene(levelToLoad);
-	}
+    }
 }

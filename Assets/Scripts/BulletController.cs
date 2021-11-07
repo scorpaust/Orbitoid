@@ -53,6 +53,12 @@ public class BulletController : MonoBehaviour
             Instantiate(impactEffect, transform.position, Quaternion.identity);
             Destroy(gameObject);
 		}
+
+        if (collision.CompareTag("Door") && impactEffect != null)
+		{
+            Instantiate(impactEffect, new Vector3(transform.position.x - .5f, transform.position.y, transform.position.z), Quaternion.identity);
+            Destroy(gameObject);
+        }
 	}
 
 	private void OnBecameInvisible()
