@@ -8,6 +8,11 @@ public class PlayerController : MonoBehaviour
     private float moveSpeed = 8f;
 
     [SerializeField]
+    private bool canMove;
+
+    public bool CanMove { get { return canMove; } set { canMove = value; } } // ENCAPSULATION
+
+    [SerializeField]
     private float jumpForce = 20f;
 
     [SerializeField]
@@ -15,6 +20,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private LayerMask whatIsGround;
+
+    [SerializeField]
+    private LayerMask whatIsDestructable;
 
     [SerializeField]
     private BulletController shotToFire;
@@ -61,7 +69,11 @@ public class PlayerController : MonoBehaviour
 
     private Animator anim;
 
+    public Animator Anim { get { return anim; } private set { } } //ENCAPSULATION
+
     private bool isOnGround;
+
+    private bool isOnDestructable;
 
     private bool canDoubleJump;
 
@@ -83,20 +95,28 @@ public class PlayerController : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
 
         abilities = GetComponent<PlayerAbilityTracker>();
+
+        canMove = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Move(); // ABSTRACTION
+        if (canMove)
+		{
+            Move(); // ABSTRACTION
 
-        Jump(); // ABSTRACTION
+            Jump(); // ABSTRACTION
 
-        CheckBallMode(); // ABSTRACTION
+            CheckBallMode(); // ABSTRACTION
+
+            Fire(); // ABSTRACTION
+        } else
+		{
+            rb.velocity = Vector2.zero;
+		}
 
         Animate(); // ABSTRACTION
-
-        Fire(); // ABSTRACTION
     }
 
     private void Move()
@@ -149,8 +169,11 @@ public class PlayerController : MonoBehaviour
         // Check if on the ground
         isOnGround = Physics2D.OverlapCircle(groundPoint.position, 0.2f, whatIsGround);
 
+        // Check if on a destructable block
+        isOnDestructable = Physics2D.OverlapCircle(groundPoint.position, 0.2f, whatIsDestructable);
+
         // Jump
-        if (Input.GetButtonDown("Jump") && (isOnGround || (canDoubleJump && abilities.CanDoubleJump)))
+        if (Input.GetButtonDown("Jump") && (isOnGround || isOnDestructable || (canDoubleJump && abilities.CanDoubleJump)))
 		{
             if (isOnGround)
 			{
@@ -171,7 +194,10 @@ public class PlayerController : MonoBehaviour
     private void StandingAnimation()
 	{
         // Jump animation
-        anim.SetBool("IsOnGround", isOnGround);
+        if (isOnGround || isOnDestructable)
+            anim.SetBool("IsOnGround", true);
+        else
+            anim.SetBool("IsOnGround", false);
 
         // Run animation
         anim.SetFloat("Speed", Mathf.Abs(rb.velocity.x));

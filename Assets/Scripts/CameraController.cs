@@ -25,9 +25,8 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        FollowPlayer(); // ABSTRACTION
+        FollowPlayerAndClampPosition(); // ABSTRACTION
 
-        ClampCameraPosition(); // ABSTRACTION
     }
 
     private void InitializeVariables()
@@ -39,18 +38,12 @@ public class CameraController : MonoBehaviour
         halfWidth = halfHeight * Camera.main.aspect;
     }
 
-    private void FollowPlayer()
+    private void FollowPlayerAndClampPosition()
 	{
         if (player != null)
         {
-            transform.position = new Vector3(player.transform.position.x + offsetX, player.transform.position.y + offsetY, transform.position.z);
+            transform.position = new Vector3(Mathf.Clamp(player.transform.position.x, boundsBox.bounds.min.x + halfWidth, boundsBox.bounds.max.x - halfWidth),
+                Mathf.Clamp(player.transform.position.y, boundsBox.bounds.min.y + halfHeight, boundsBox.bounds.max.y - halfHeight), transform.position.z);
         }
-    }
-
-    private void ClampCameraPosition()
-	{
-        Mathf.Clamp(player.transform.position.x, boundsBox.bounds.min.x + halfWidth, boundsBox.bounds.max.x);
-
-        Mathf.Clamp(player.transform.position.y, boundsBox.bounds.min.y + halfHeight, boundsBox.bounds.max.y);
     }
 }
