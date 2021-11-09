@@ -44,6 +44,9 @@ public class CameraController : MonoBehaviour
         {
             transform.position = new Vector3(Mathf.Clamp(player.transform.position.x + offsetX, boundsBox.bounds.min.x + halfWidth, boundsBox.bounds.max.x - halfWidth),
                 Mathf.Clamp(player.transform.position.y + offsetY, boundsBox.bounds.min.y + halfHeight, boundsBox.bounds.max.y - halfHeight), transform.position.z);
+        } else
+		{
+            player = FindObjectOfType<PlayerController>();
         }
     }
 }
