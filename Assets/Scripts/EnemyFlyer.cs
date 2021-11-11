@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyFlyer : Enemy
+public class EnemyFlyer : Enemy //INHERITANCE
 {
     [SerializeField]
     private float rangeToStartChase, turnSpeed;
@@ -21,7 +21,7 @@ public class EnemyFlyer : Enemy
     }
 
     // Update is called once per frame
-    void Update()
+    new void Update()
     {
         Chase(); // ABSTRACTION
     }

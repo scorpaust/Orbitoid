@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyWalker : Enemy
+public class EnemyWalker : Enemy //INHERITANCE
 {
     // Start is called before the first frame update
     new void Start()
@@ -11,8 +11,9 @@ public class EnemyWalker : Enemy
     }
 
     // Update is called once per frame
-    void Update()
+    new void Update()
     {
         Patrol();
     }
+
 }

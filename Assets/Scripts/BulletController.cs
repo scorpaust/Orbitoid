@@ -48,6 +48,11 @@ public class BulletController : MonoBehaviour
             Destroy(gameObject);
         }
 
+        if (collision.CompareTag("Boss"))
+		{
+            BossHealthController.instance.TakeDamage(damageAmount);
+		}
+
         if ((collision.CompareTag("Ground") || collision.CompareTag("Enemy")) && impactEffect != null)
 		{
             Instantiate(impactEffect, transform.position, Quaternion.identity);

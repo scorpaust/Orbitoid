@@ -7,6 +7,7 @@ public enum EnemyState
     IDLE,
     PATROL,
     CHASE,
+    BATTLEMODE,
     DEAD
 }
 
@@ -45,8 +46,7 @@ public class Enemy : MonoBehaviour
     // ENCAPSULATION
     public EnemyState State { get { return state; } set { state = value; } } 
 
-
-	private void Awake()
+	protected virtual void Awake()
 	{
         anim = GetComponentInChildren<Animator>();
 	}
@@ -60,7 +60,7 @@ public class Enemy : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         Patrol(); // ABSTRACTION
     }

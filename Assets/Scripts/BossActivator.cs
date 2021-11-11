@@ -16,4 +16,5 @@ public class BossActivator : MonoBehaviour
 			gameObject.SetActive(false);
 		}
 	}
+
 }
