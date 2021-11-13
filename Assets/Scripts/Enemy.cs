@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour
     private float jumpForce;
 
     [SerializeField]
-    private Rigidbody2D rb;
+    protected Rigidbody2D rb;
 
     [SerializeField]
     private EnemyType type;
@@ -126,4 +126,5 @@ public class Enemy : MonoBehaviour
             pPoint.SetParent(null);
 		} 
 	}
+
 }

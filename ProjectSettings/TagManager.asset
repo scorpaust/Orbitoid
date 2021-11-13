@@ -21,8 +21,8 @@ TagManager:
   - Destructable
   - Pickups
   - TriggerZone
-  - 
-  - 
+  - Boss
+  - BossShot
   - 
   - 
   - 

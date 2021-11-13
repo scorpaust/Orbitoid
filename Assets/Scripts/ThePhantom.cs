@@ -19,6 +19,17 @@ public class ThePhantom : BossBattle //INHERITANCE
     [SerializeField]
     private Transform boss;
 
+    [SerializeField]
+    private GameObject bullet;
+
+    [SerializeField]
+    private Transform shotPoint;
+
+    [SerializeField]
+    private float timeBetweenShots1, timeBetweenShots2;
+
+    private float shotCounter;
+
     private float activeCounter, fadeCounter, inactiveCounter;
 
     protected override void Awake()
@@ -32,6 +43,8 @@ public class ThePhantom : BossBattle //INHERITANCE
         base.Start();
 
         activeCounter = activeTime;
+
+        shotCounter = timeBetweenShots1;
     }
 
     // Update is called once per frame
@@ -61,6 +74,15 @@ public class ThePhantom : BossBattle //INHERITANCE
 
                 anim.SetTrigger("Vanish");
 			}
+
+            shotCounter -= Time.deltaTime;
+
+            if (shotCounter <= 0)
+			{
+                shotCounter = timeBetweenShots1;
+
+                Instantiate(bullet, shotPoint.position, Quaternion.identity);
+			}
 		}
         else if (fadeCounter > 0)
 		{
@@ -84,6 +106,8 @@ public class ThePhantom : BossBattle //INHERITANCE
                 boss.gameObject.SetActive(true);
 
                 activeCounter = activeTime;
+
+                shotCounter = timeBetweenShots1;
 			}
 		}
 	}
@@ -108,6 +132,22 @@ public class ThePhantom : BossBattle //INHERITANCE
                     fadeCounter = fadeOutTime;
 
                     anim.SetTrigger("Vanish");
+                }
+
+                shotCounter -= Time.deltaTime;
+
+                if (shotCounter <= 0)
+                {
+                    if (PlayerHealthController.instance.CurrentHealth > threshold2)
+					{
+                        shotCounter = timeBetweenShots1;
+					}
+                    else
+					{
+                        shotCounter = timeBetweenShots2;
+                    }
+
+                    Instantiate(bullet, shotPoint.position, Quaternion.identity);
                 }
             }
             else if (fadeCounter > 0)
@@ -135,6 +175,15 @@ public class ThePhantom : BossBattle //INHERITANCE
                         targetPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
 
                     boss.gameObject.SetActive(true);
+
+                    if (PlayerHealthController.instance.CurrentHealth > threshold2)
+                    {
+                        shotCounter = timeBetweenShots1;
+                    }
+                    else
+                    {
+                        shotCounter = timeBetweenShots2;
+                    }
                 }
             }
         }

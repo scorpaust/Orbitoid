@@ -7,39 +7,47 @@ public class BulletController : MonoBehaviour
     [SerializeField]
     private float bulletSpeed;
 
+    public float BulletSpeed { get { return bulletSpeed; } }
+
     [SerializeField]
     private Vector2 moveDir;
 
     [SerializeField]
     private GameObject impactEffect;
 
+    public GameObject ImpactEffect {  get { return impactEffect; } }
+
     [SerializeField]
     private int damageAmount = 1;
+
+    protected int DamageAmount {  get { return damageAmount; } set { damageAmount = value; } }
 
     // ENCAPSULATION
     public Vector2 MoveDir { get { return moveDir; } set { moveDir = value; } }
 
     private Rigidbody2D rb;
 
+    public Rigidbody2D RB { get { return rb; } private set { } }
+
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         MoveBullet();
     }
 
-    private void MoveBullet()
+    protected virtual void MoveBullet()
 	{
         rb.velocity = moveDir * bulletSpeed;
 	}
 
-	private void OnTriggerEnter2D(Collider2D collision)
+	protected virtual void OnTriggerEnter2D(Collider2D collision)
 	{
         if (collision.CompareTag("Enemy"))
         {
@@ -66,7 +74,7 @@ public class BulletController : MonoBehaviour
         }
 	}
 
-	private void OnBecameInvisible()
+	protected void OnBecameInvisible()
 	{
         Destroy(gameObject);
 	}

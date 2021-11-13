@@ -257,6 +257,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 101989281}
   m_CullTransparentMesh: 1
+--- !u!1 &156977876
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 156977877}
+  m_Layer: 0
+  m_Name: Shot Point
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &156977877
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156977876}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.22999573, y: -0.15999985, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1321763537}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &186735760
 GameObject:
   m_ObjectHideFlags: 0
@@ -8899,7 +8929,7 @@ GameObject:
   - component: {fileID: 1321763538}
   - component: {fileID: 1321763539}
   - component: {fileID: 1321763540}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Ghost
   m_TagString: Boss
   m_Icon: {fileID: 0}
@@ -8916,7 +8946,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 156977877}
   m_Father: {fileID: 1752587880}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9155,6 +9186,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 39947680869995910, guid: e579552d38ed85347975a0d2fe043a7b, type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 39947680869995910, guid: e579552d38ed85347975a0d2fe043a7b, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 39947680869995910, guid: e579552d38ed85347975a0d2fe043a7b, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1751784731
+      objectReference: {fileID: 0}
     - target: {fileID: 39947681343323497, guid: e579552d38ed85347975a0d2fe043a7b, type: 3}
       propertyPath: m_Name
       value: Player
@@ -9481,6 +9524,10 @@ MonoBehaviour:
   - {fileID: 186735761}
   targetPoint: {fileID: 0}
   boss: {fileID: 1321763537}
+  bullet: {fileID: 8342197438915722758, guid: ea176559d0a9d654db1be56738c8d6a7, type: 3}
+  shotPoint: {fileID: 156977877}
+  timeBetweenShots1: 1
+  timeBetweenShots2: 0.5
 --- !u!1 &1811310425
 GameObject:
   m_ObjectHideFlags: 0
