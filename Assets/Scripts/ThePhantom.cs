@@ -43,6 +43,10 @@ public class ThePhantom : BossBattle //INHERITANCE
 		{
             StartFirstPhase();
 		}
+        else
+		{
+            StartSecondPhase();
+		}
     }
 
     private void StartFirstPhase()
@@ -82,5 +86,57 @@ public class ThePhantom : BossBattle //INHERITANCE
                 activeCounter = activeTime;
 			}
 		}
+	}
+
+    private void StartSecondPhase()
+	{
+        if (targetPoint == null)
+		{
+            targetPoint = boss;
+
+            fadeCounter = fadeOutTime;
+
+            anim.SetTrigger("Vanish");
+		} else
+		{
+            if (Vector3.Distance(boss.position, targetPoint.position) > .02f)
+            {
+                boss.position = Vector3.MoveTowards(boss.position, targetPoint.position, moveSpeed * Time.deltaTime);
+
+                if (Vector3.Distance(boss.position, targetPoint.position) <= .02f)
+                {
+                    fadeCounter = fadeOutTime;
+
+                    anim.SetTrigger("Vanish");
+                }
+            }
+            else if (fadeCounter > 0)
+            {
+                fadeCounter -= Time.deltaTime;
+
+                if (fadeCounter <= 0)
+                {
+                    inactiveCounter = inactiveTime;
+
+                    boss.gameObject.SetActive(false);
+                }
+            }
+            else if (inactiveCounter > 0)
+            {
+                inactiveCounter -= Time.deltaTime;
+
+                if (inactiveCounter <= 0)
+                {
+                    boss.transform.position = spawnPoints[Random.Range(0, spawnPoints.Length)].position;
+
+                    targetPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+
+                    while(targetPoint.position == boss.position)
+                        targetPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+
+                    boss.gameObject.SetActive(true);
+                }
+            }
+        }
 	}
 }
