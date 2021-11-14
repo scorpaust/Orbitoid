@@ -10,8 +10,17 @@ public class BossBattle : Enemy
     [SerializeField]
     private float camSpeed;
 
+    [SerializeField]
+    protected GameObject winObjects;
+
+    private bool battleEnded;
+
+    public bool BattleEnded { get { return battleEnded; } set { battleEnded = value; } } // ENCAPSULATION
+
     private CameraController cam;
 
+    public CameraController Cam { get { return cam; } private set { } } // ENCAPSULATION
+    
 	// Start is called before the first frame update
 	protected override void Start()
     {
@@ -38,6 +47,7 @@ public class BossBattle : Enemy
 	{
         State = EnemyState.DEAD;
 
-        gameObject.SetActive(false);
+        battleEnded = true;
+        
 	}
 }

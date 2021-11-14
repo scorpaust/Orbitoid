@@ -52,14 +52,36 @@ public class ThePhantom : BossBattle //INHERITANCE
     {
         base.Update();
 
-        if (BossHealthController.instance.CurrentHealth > threshold1)
+        if (!BattleEnded)
 		{
-            StartFirstPhase();
-		}
-        else
+            if (BossHealthController.instance.CurrentHealth > threshold1)
+            {
+                StartFirstPhase();
+            }
+            else
+            {
+                StartSecondPhase();
+            }
+        } else
 		{
-            StartSecondPhase();
-		}
+            PhantomDeath();
+
+            fadeCounter -= Time.deltaTime;
+
+            if (true)
+			{
+                if (winObjects != null)
+				{
+                    winObjects.SetActive(true);
+
+                    winObjects.transform.SetParent(null);
+				}
+
+                Cam.enabled = true;
+
+                gameObject.SetActive(false);
+			}
+        }        
     }
 
     private void StartFirstPhase()
@@ -187,5 +209,29 @@ public class ThePhantom : BossBattle //INHERITANCE
                 }
             }
         }
+	}
+
+    private void PhantomDeath()
+	{
+        fadeCounter = fadeOutTime;
+
+        anim.SetTrigger("Vanish");
+
+        boss.GetComponent<Collider2D>().enabled = false;
+
+        RemoveBullets();
+	}
+
+    private void RemoveBullets()
+	{
+        BossBullet[] bullets = FindObjectsOfType<BossBullet>();
+
+        if (bullets.Length > 0)
+		{
+            foreach(BossBullet bullet in bullets)
+			{
+                Destroy(bullet.gameObject);
+			}
+		}
 	}
 }
