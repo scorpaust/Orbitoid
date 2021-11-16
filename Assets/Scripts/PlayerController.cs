@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (canMove)
+        if (canMove && Time.timeScale != 0f)
 		{
             Move(); // ABSTRACTION
 

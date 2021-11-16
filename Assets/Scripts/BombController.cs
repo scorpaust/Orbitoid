@@ -16,6 +16,12 @@ public class BombController : MonoBehaviour
     [SerializeField]
     private LayerMask whatIsDestructable;
 
+    [SerializeField]
+    private LayerMask whatIsDamageable;
+
+    [SerializeField]
+    private int damageAmount;
+
     // Update is called once per frame
     void Update()
     {
@@ -34,16 +40,29 @@ public class BombController : MonoBehaviour
 
                 Destroy(gameObject);
 
-                Collider2D[] objectsToDamage = Physics2D.OverlapCircleAll(transform.position, blastRange, whatIsDestructable);
+                Collider2D[] objectsToRemove = Physics2D.OverlapCircleAll(transform.position, blastRange, whatIsDestructable);
 
-                if (objectsToDamage.Length > 0)
+                if (objectsToRemove.Length > 0)
 				{
-                    foreach (Collider2D col in objectsToDamage)
+                    foreach (Collider2D col in objectsToRemove)
 					{
                         Destroy(col.gameObject);
 					}
 				}
 			}
-		}
+
+            Collider2D[] objectsToDamage = Physics2D.OverlapCircleAll(transform.position, blastRange, whatIsDamageable);
+
+            foreach (Collider2D col in objectsToDamage)
+			{
+                EnemyHealthController enemyHealth = col.GetComponent<EnemyHealthController>();
+
+                if (enemyHealth != null)
+				{
+                    enemyHealth.DamageEnemy(damageAmount);
+				}
+			}
+
+        }
 	}
 }

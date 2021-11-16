@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class UIController : MonoBehaviour
 
     [SerializeField]
     private float fadeSpeed = 2f;
+
+    [SerializeField]
+    private GameObject pauseScreen;
 
     private bool fadingToBlack, fadingFromBlack;
 
@@ -35,6 +39,11 @@ public class UIController : MonoBehaviour
 	private void Update()
 	{
         HandleFadingScreen(); //ABSTRACTION
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+		{
+            PauseUnpause();
+		}
 	}
 
     private void HandleFadingScreen()
@@ -72,5 +81,40 @@ public class UIController : MonoBehaviour
 	{
         fadingToBlack = false;
         fadingFromBlack = true;
+	}
+
+    public void PauseUnpause()
+	{
+        if (!pauseScreen.activeSelf)
+		{
+            pauseScreen.SetActive(true);
+
+            Time.timeScale = 0f;
+		}
+        else
+		{
+            pauseScreen.SetActive(false);
+
+            Time.timeScale = 1f;
+		}
+	}
+
+    public void GoToMainMenu()
+	{
+        Time.timeScale = 1f;
+
+        SceneManager.LoadScene(0);
+
+        Destroy(PlayerHealthController.instance.gameObject);
+
+        PlayerHealthController.instance = null;
+
+        Destroy(RespawnController.instance.gameObject);
+
+        RespawnController.instance = null;
+
+        instance = null;
+
+        Destroy(gameObject);
 	}
 }

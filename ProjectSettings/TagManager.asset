@@ -23,7 +23,7 @@ TagManager:
   - TriggerZone
   - Boss
   - BossShot
-  - 
+  - Enemy
   - 
   - 
   - 
@@ -65,4 +65,7 @@ TagManager:
     locked: 0
   - name: Door
     uniqueID: 3138736415
+    locked: 0
+  - name: UI
+    uniqueID: 2550965475
     locked: 0
