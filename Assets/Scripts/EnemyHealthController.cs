@@ -23,6 +23,8 @@ public class EnemyHealthController : MonoBehaviour
                 Instantiate(deathFX, transform.position, transform.rotation);
 			}
 
+            AudioManager.instance.PlaySoundFX(4);
+
             Destroy(gameObject);
 		}
 	}

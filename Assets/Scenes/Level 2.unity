@@ -187,45 +187,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 174914204, guid: 095c46dbf00d82a4eada487eee3f6c16, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 11.35
-      objectReference: {fileID: 0}
-    - target: {fileID: 1541306326, guid: 095c46dbf00d82a4eada487eee3f6c16, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 107.98
-      objectReference: {fileID: 0}
     - target: {fileID: 806595044113333998, guid: 095c46dbf00d82a4eada487eee3f6c16, type: 3}
       propertyPath: m_Name
       value: Level Bits
-      objectReference: {fileID: 0}
-    - target: {fileID: 3944133067205373202, guid: 095c46dbf00d82a4eada487eee3f6c16, type: 3}
-      propertyPath: m_Size.x
-      value: 39.45563
-      objectReference: {fileID: 0}
-    - target: {fileID: 3944133067205373202, guid: 095c46dbf00d82a4eada487eee3f6c16, type: 3}
-      propertyPath: m_Size.y
-      value: 21.68752
-      objectReference: {fileID: 0}
-    - target: {fileID: 3944133067205373202, guid: 095c46dbf00d82a4eada487eee3f6c16, type: 3}
-      propertyPath: m_Offset.x
-      value: 3.593649
-      objectReference: {fileID: 0}
-    - target: {fileID: 3944133067205373202, guid: 095c46dbf00d82a4eada487eee3f6c16, type: 3}
-      propertyPath: m_Offset.y
-      value: 1.0184207
-      objectReference: {fileID: 0}
-    - target: {fileID: 3944133068245013202, guid: 095c46dbf00d82a4eada487eee3f6c16, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 70.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3944133068245013203, guid: 095c46dbf00d82a4eada487eee3f6c16, type: 3}
-      propertyPath: m_Size.x
-      value: 1.4467926
-      objectReference: {fileID: 0}
-    - target: {fileID: 3944133068245013203, guid: 095c46dbf00d82a4eada487eee3f6c16, type: 3}
-      propertyPath: m_Offset.x
-      value: 0.2233963
       objectReference: {fileID: 0}
     - target: {fileID: 4161383447710041430, guid: 095c46dbf00d82a4eada487eee3f6c16, type: 3}
       propertyPath: m_RootOrder

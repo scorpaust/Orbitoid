@@ -10,6 +10,8 @@ public class BossBullet : BulletController // INHERITANCE
         base.Start();
 
         InitializeBossBullet(); // ABSTRACTION
+
+        AudioManager.instance.PlaySFXAdjusted(2);
     }
 
     private void InitializeBossBullet()
@@ -42,5 +44,7 @@ public class BossBullet : BulletController // INHERITANCE
 
             Destroy(gameObject);
 		}
+
+        AudioManager.instance.PlaySoundFX(3);
 	}
 }

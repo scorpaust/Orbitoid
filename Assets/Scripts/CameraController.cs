@@ -20,6 +20,8 @@ public class CameraController : MonoBehaviour
 	void Start()
     {
         InitializeVariables(); // ABSTRACTION
+
+        AudioManager.instance.PlayLevelMusic();
     }
 
     // Update is called once per frame

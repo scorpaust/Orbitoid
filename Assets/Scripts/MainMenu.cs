@@ -8,7 +8,12 @@ public class MainMenu : MonoBehaviour
 	[SerializeField]
 	private string newGameScene;
 
-    public void NewGame()
+	private void Awake()
+	{
+		AudioManager.instance.PlayMainMenuMusic();
+	}
+
+	public void NewGame()
 	{
 		SceneManager.LoadScene(newGameScene);
 	}

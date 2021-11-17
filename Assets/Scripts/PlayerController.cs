@@ -131,6 +131,8 @@ public class PlayerController : MonoBehaviour
                 dashCounter = dashTime;
 
                 ShowAfterImage();
+
+                AudioManager.instance.PlaySFXAdjusted(7);
             }
         }
 
@@ -178,12 +180,16 @@ public class PlayerController : MonoBehaviour
             if (isOnGround)
 			{
                 canDoubleJump = true;
+
+                AudioManager.instance.PlaySFXAdjusted(12);
             }
             else
 			{
                 canDoubleJump = false;
 
                 anim.SetTrigger("DoubleJump");
+
+                AudioManager.instance.PlaySFXAdjusted(9);
             }
                 
 
@@ -212,10 +218,15 @@ public class PlayerController : MonoBehaviour
                 Instantiate(shotToFire, shotPoint.position, shotPoint.rotation).MoveDir = new Vector2(transform.localScale.x, 0f);
 
                 anim.SetTrigger("ShotFired");
+
+                AudioManager.instance.PlaySFXAdjusted(14);
+
             } else if (ball.activeSelf && abilities.CanDropBomb)
 			{
                 Instantiate(bomb, bombPoint.position, bombPoint.rotation);
-			}
+
+                AudioManager.instance.PlaySFXAdjusted(14);
+            }
             
 		}
 	}
@@ -233,6 +244,8 @@ public class PlayerController : MonoBehaviour
                     ball.SetActive(true);
 
                     standing.SetActive(false);
+
+                    AudioManager.instance.PlaySoundFX(6);
 				}
 			}
             else
@@ -251,6 +264,8 @@ public class PlayerController : MonoBehaviour
                     ball.SetActive(false);
 
                     standing.SetActive(true);
+
+                    AudioManager.instance.PlaySoundFX(10);
                 }
             }
             else

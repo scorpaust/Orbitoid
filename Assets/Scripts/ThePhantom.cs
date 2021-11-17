@@ -42,6 +42,8 @@ public class ThePhantom : BossBattle //INHERITANCE
     {
         base.Start();
 
+        AudioManager.instance.PlayBossMusic();
+
         activeCounter = activeTime;
 
         shotCounter = timeBetweenShots1;
