@@ -34,6 +34,9 @@ public class UIController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if (PlayerHealthController.instance != null)
+            UpdateHealth(PlayerHealthController.instance.CurrentHealth, PlayerHealthController.instance.MaxHealth);
     }
 
 	private void Update()

@@ -1126,6 +1126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossToActivate: {fileID: 1752587879}
+  bossRef: Phantom
 --- !u!61 &948079532
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10843,6 +10844,7 @@ MonoBehaviour:
   shotPoint: {fileID: 156977877}
   timeBetweenShots1: 1
   timeBetweenShots2: 0.5
+  bossRef: Phantom
 --- !u!1 &1805389132
 GameObject:
   m_ObjectHideFlags: 0

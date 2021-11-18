@@ -73,6 +73,17 @@ public class DoorController : MonoBehaviour
 		}
 	}
 
+    private void StoreContinueVars()
+	{
+        PlayerPrefs.SetString("ContinueLevel", levelToLoad);
+
+        PlayerPrefs.SetFloat("PosX", exitPoint.position.x);
+
+        PlayerPrefs.SetFloat("PosY", exitPoint.position.y);
+
+        PlayerPrefs.SetFloat("PosZ", exitPoint.position.z);
+    }
+
     private IEnumerator UseDoorCo()
 	{
         playerExiting = true;
@@ -84,6 +95,8 @@ public class DoorController : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
 
         UIController.instance.FadeIn();
+
+        StoreContinueVars(); // ABSTRACTION
 
         SceneManager.LoadScene(levelToLoad);
 

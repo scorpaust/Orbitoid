@@ -36,30 +36,6 @@ public class MainMenu : MonoBehaviour
 				player.CanDoubleJump = true;
 			}
 		}
-
-		if (PlayerPrefs.HasKey("DashUnlocked"))
-		{
-			if (PlayerPrefs.GetInt("DashUnlocked") == 1)
-			{
-				player.CanDash = true;
-			}
-		}
-
-		if (PlayerPrefs.HasKey("BecomeBallUnlocked"))
-		{
-			if (PlayerPrefs.GetInt("BecomeBallUnlocked") == 1)
-			{
-				player.CanBecomeBall = true;
-			}
-		}
-
-		if (PlayerPrefs.HasKey("CanDropBallUnlocked"))
-		{
-			if (PlayerPrefs.GetInt("CanDropBombUnlocked") == 1)
-			{
-				player.CanDropBomb = true;
-			}
-		}
 	}
 
 	public void NewGame()

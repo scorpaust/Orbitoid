@@ -28,6 +28,9 @@ public class ThePhantom : BossBattle //INHERITANCE
     [SerializeField]
     private float timeBetweenShots1, timeBetweenShots2;
 
+    [SerializeField]
+    private string bossRef;
+
     private float shotCounter;
 
     private float activeCounter, fadeCounter, inactiveCounter;
@@ -82,6 +85,8 @@ public class ThePhantom : BossBattle //INHERITANCE
                 Cam.enabled = true;
 
                 gameObject.SetActive(false);
+
+                PlayerPrefs.SetInt(bossRef, 1);
 			}
         }        
     }

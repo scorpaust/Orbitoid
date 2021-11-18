@@ -9,6 +9,8 @@ public class PlayerHealthController : MonoBehaviour
     [SerializeField]
     private int maxHealth = 10;
 
+    public int MaxHealth {  get { return maxHealth; } private set { } }
+
     [SerializeField]
     private float invencibilityLength;
 
@@ -44,8 +46,6 @@ public class PlayerHealthController : MonoBehaviour
 	void Start()
     {
         currentHealth = maxHealth;
-
-        UIController.instance.UpdateHealth(currentHealth, maxHealth);
     }
 
     // Update is called once per frame
