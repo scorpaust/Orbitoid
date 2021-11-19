@@ -17,6 +17,8 @@ public class MainMenu : MonoBehaviour
 	private void Awake()
 	{
 		AudioManager.instance.PlayMainMenuMusic();
+
+		MouseManager.instance.ShowMouse();
 	}
 
 	private void Start()
@@ -65,6 +67,13 @@ public class MainMenu : MonoBehaviour
 	public void NewGame()
 	{
 		PlayerPrefs.DeleteAll();
+
+		if (PlayerHealthController.instance != null)
+		{
+			PlayerHealthController.instance.FillHealth();
+
+			UIController.instance.UpdateHealth(PlayerHealthController.instance.CurrentHealth, PlayerHealthController.instance.MaxHealth);
+		}
 
 		SceneManager.LoadScene(newGameScene);
 	}

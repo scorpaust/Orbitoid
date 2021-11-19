@@ -23,7 +23,7 @@ public class PlayerHealthController : MonoBehaviour
     private int currentHealth;
 
     // ENCAPSULATION
-    public int CurrentHealth { get { return currentHealth; } private set { } }
+    public int CurrentHealth { get { return currentHealth; } set { currentHealth = value; } }
 
     private float invencibilityCounter;
 

@@ -36,7 +36,22 @@ public class UIController : MonoBehaviour
         }
 
         if (PlayerHealthController.instance != null)
-            UpdateHealth(PlayerHealthController.instance.CurrentHealth, PlayerHealthController.instance.MaxHealth);
+		{
+            if (PlayerPrefs.HasKey("PosX") && PlayerPrefs.HasKey("PosY") && PlayerPrefs.HasKey("PosZ"))
+            {
+                PlayerHealthController.instance.gameObject.transform.position = new Vector3(PlayerPrefs.GetFloat("PosX"), PlayerPrefs.GetFloat("PosY"), PlayerPrefs.GetFloat("PosZ"));
+            }
+            else
+            {
+                PlayerHealthController.instance.CurrentHealth = PlayerHealthController.instance.MaxHealth;
+
+                UpdateHealth(PlayerHealthController.instance.CurrentHealth, PlayerHealthController.instance.MaxHealth);
+
+                PlayerHealthController.instance.gameObject.transform.position = new Vector3(0f, 0.32f, 0f);                
+            }
+        }
+
+        MouseManager.instance.HideMouse();
     }
 
 	private void Update()
@@ -93,12 +108,16 @@ public class UIController : MonoBehaviour
             pauseScreen.SetActive(true);
 
             Time.timeScale = 0f;
+
+            MouseManager.instance.ShowMouse();
 		}
         else
 		{
             pauseScreen.SetActive(false);
 
             Time.timeScale = 1f;
+
+            MouseManager.instance.HideMouse();
 		}
 	}
 
@@ -119,5 +138,7 @@ public class UIController : MonoBehaviour
         instance = null;
 
         Destroy(gameObject);
+
+        MouseManager.instance.ShowMouse();
 	}
 }

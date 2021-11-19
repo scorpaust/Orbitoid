@@ -56,7 +56,14 @@ public class DoorController : MonoBehaviour
 	{
         if (playerExiting)
 		{
-            player.transform.position = Vector3.MoveTowards(player.transform.position, exitPoint.position, movePlayerSpeed * Time.deltaTime);
+            if (!GameDemoEnded())
+			{
+                player.transform.position = Vector3.MoveTowards(player.transform.position, exitPoint.position, movePlayerSpeed * Time.deltaTime);
+            }
+            else
+			{
+                player.transform.position = Vector3.MoveTowards(player.transform.position, new Vector3(200f, 2.57f, exitPoint.position.z), movePlayerSpeed * Time.deltaTime);
+            }
 		}
 	}
 
@@ -75,8 +82,12 @@ public class DoorController : MonoBehaviour
 
     private void StoreContinueVars()
 	{
-        PlayerPrefs.SetString("ContinueLevel", levelToLoad);
-
+        
+        if (!GameDemoEnded())
+		{
+            PlayerPrefs.SetString("ContinueLevel", levelToLoad);
+        }
+            
         PlayerPrefs.SetFloat("PosX", exitPoint.position.x);
 
         PlayerPrefs.SetFloat("PosY", exitPoint.position.y);
@@ -96,16 +107,37 @@ public class DoorController : MonoBehaviour
 
         UIController.instance.FadeIn();
 
-        StoreContinueVars(); // ABSTRACTION
+        if (!GameDemoEnded())
+		{
+            StoreContinueVars(); // ABSTRACTION
+        }
+        else
+		{
+            PlayerPrefs.DeleteAll();
+
+            PlayerHealthController.instance.FillHealth();
+
+            MouseManager.instance.ShowMouse();
+        }
 
         SceneManager.LoadScene(levelToLoad);
 
         yield return new WaitForEndOfFrame();
 
-        RespawnController.instance.SetSpawnPoint(exitPoint.position);
-
         player.CanMove = true;
 
         player.Anim.enabled = true;
+
+        RespawnController.instance.SetSpawnPoint(exitPoint.position);
     }
+
+    private bool GameDemoEnded()
+	{
+        if (levelToLoad == "Main Menu")
+		{
+            return true;
+		}
+
+        return false;
+	}
 }
